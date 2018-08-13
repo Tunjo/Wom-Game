@@ -1,0 +1,5 @@
+{
+"intro": " Hello warrior!!! \n Welcome to World of monsters!!! \n On your path you will fight the monsters and do quests in this ugly and scary world!!!\n Be ready for the most epic battles in your life.\n This journal will be adventure of slaying beasts, dragons and witches.\n Warrior, you are worn!!!\n",
+"option": " 1. Explore \n 2. Inventory \n 3. Quests \n 4. Craft \n 5. Back \n",
+"file": " 1. Winter Lakes \n 2. Flame Land \n 3. Un Guru Marceau \n 4. Frost Bolt Vally \n 5. Dragon Bolt Mountain \n"
+}
