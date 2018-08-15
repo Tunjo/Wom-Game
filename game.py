@@ -28,7 +28,7 @@ class Warrior(Player):
 
 
     def stats(self):
-        self.hp = 100
+        self.hp = 1000
         self.maxhp = 100
         self.dmg = 50
         self.inventory = ["Rusty sword"]
@@ -51,6 +51,7 @@ class Warrior(Player):
 
     def deal_dmg(self):
         dmgdone = random.randint(math.floor(self.dmg/2), self.dmg)
+        txt_flush(data["dealdmg"] % dmgdone)
         return dmgdone
 
 
@@ -69,6 +70,7 @@ class Monsters():
 
     def take_dmg(self):
         dmg = random.randint(math.floor(self.dmg / 2), self.dmg)
+        txt_flush(data["takedmg"] % dmg)
         return dmg
 
 
@@ -186,22 +188,31 @@ def ice_pike():
             print(data["option0"])
             option = input("1 or 2: ")
             if option == "1":
-                Icepike = Monsters("Ice Pike Monster", 60, 30, ["Pike Sword"], "Ice Pike Diamond", "Pike quest")
+                Icepike = Monsters("Ice Pike Monster", 60, 30, ["Pike Sword", "Pike Scales", "Broken Wand", "Pike Rusty Dagger"], "Ice Pike Diamond", "Pike quest")
                 while option == "1":
                     clear_screen()
-                    if Icepike.hp <= 1:
-                        txt_flush(data["monsterdead"] % Icepike.name)
-                        for item in stats:
-                            item["bag"] += Icepike.gem
-                    else:
-                        Icepike.hp -= Warrior.deal_dmg(Warrior)
-                    if item["hp"] <= 1:
-                        txt_flush(data["dead"])
-                        game_option()
-                    else:
-                       item["hp"] -= Icepike.take_dmg()
+                    print(data["option1"])
+                    print_stats()
+                    option = input(">> ")
+                    if option == "1":
+                        if Icepike.hp <= 1:
+                            txt_flush(data["monsterdead"] % Icepike.name)
+                            for item in stats:
+                                Warrior.bag += Icepike.gem
+                                drop = random.choice(Icepike.drops)
+                                Warrior.bag += str(drop)
+                                Warrior.bag += str(Icepike.quest)
+                                print(Warrior.bag)
+                                time.sleep(4)
+                            game_option()
+                        else:
+                            Icepike.hp -= Warrior.deal_dmg(Warrior)
 
-
+                        if item["hp"] <= 1:
+                            txt_flush(data["dead"])
+                            game_option()
+                        else:
+                           item["hp"] -= Icepike.take_dmg()
             elif option == "2":
                 game_option()
 

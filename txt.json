@@ -8,5 +8,6 @@
 "dealdmg": " You deal %i dmg!!! \n",
 "monsterdead": " %s is dead!!! \n",
 "takedmg": " Enemy deal %i dmg!!! \n",
-"dead": "YOU ARE DEAD!!!"
+"dead": " YOU ARE DEAD!!! \n ",
+  "option1": " 1: Hit \n 2. Fireball \n 3. Potion \n 4. Run \n"
 }
