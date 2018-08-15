@@ -3,6 +3,7 @@ import os
 import time
 import random
 import json
+import math
 
 
 class Player():
@@ -16,46 +17,67 @@ class Player():
         players.append(name)
 
 class Warrior(Player):
-    def __init__(self, hp, maxhp, dmg, inventory, potion):
+    def __init__(self, hp, maxhp, dmg, inventory, potion, gold, bag):
         self.hp = hp
         self.maxhp= maxhp
         self.dmg = dmg
         self.inventory = inventory
         self.potion = potion
+        self.gold = gold
+        self.bag = bag
 
 
     def stats(self):
         self.hp = 100
         self.maxhp = 100
-        self. dmg = 50
+        self.dmg = 50
         self.inventory = ["Rusty sword"]
         self.potion = 1
+        self.gold = 50
+        self.bag = []
+        global player_stats
         player_stats = {
             "name": self.name,
             "hp": self.hp,
             "maxhp": self.maxhp,
             "dmg": self.dmg,
             "inventory": self.inventory,
-            "potion": self.potion
+            "potion": self.potion,
+            "gold": self.gold,
+            "bag": self.bag
         }
 
         stats.append(player_stats)
 
+    def deal_dmg(self):
+        dmgdone = random.randint(math.floor(self.dmg/2), self.dmg)
+        return dmgdone
+
+
+
+
+
 
 class Monsters():
-    def __init__(self, name, hp, maxhp, dmg, drop):
+    def __init__(self, name, hp, dmg, drops, gem, quest):
         self.name = name
         self.hp = hp
-        self.maxhp = maxhp
         self.dmg = dmg
-        self.drop = drop
+        self.drops = drops
+        self.gem = gem
+        self.quest = quest
+
+    def take_dmg(self):
+        dmg = random.randint(math.floor(self.dmg / 2), self.dmg)
+        return dmg
 
 
-def map_desplay():
+
+def draw_txt(file):
     clear_screen()
-    mapfile = open("World.txt", "r")
-    map = mapfile.read()
-    txt_flush_fast(map)
+    directory = open("draws\%s" % file, "r")
+    draw = directory.read()
+    print(draw)
 
 
 def print_stats():
@@ -65,12 +87,15 @@ def print_stats():
         print(('Dmg: {}').format(item["dmg"]))
         print(('Inventory: {}').format(item["inventory"]))
         print(('Helth potions: {}').format(item["potion"]))
+        print(('Gold: {}').format(item["gold"]))
+        print(('Bag: {}').format(item["bag"]))
 
 
 def json_load():
-    with open("jsontxt.txt") as file:
+    with open("txt.json") as file:
         global data
         data = json.load(file)
+
 
 
 def clear_screen():
@@ -135,14 +160,55 @@ def load_game():
 
 def explore_world():
     clear_screen()
-    map_desplay()
+    draw_txt("world.txt")
     txt_flush(data["file"])
     inp = input("1, 2, 3, 4 or 5: ")
     if inp == "1":
         clear_screen()
-        print("JEBOTE STO JE ZIMA")
+        ice_pike()
     else:
         pass
+
+
+def ice_pike():
+    for item in stats:
+        if "Ice Pike Diamond" == item["bag"]:
+            sys.exit()
+        else:
+            clear_screen()
+            txt_flush(data["winter"])
+            time.sleep(3)
+            clear_screen()
+            draw_txt("fish.txt")
+            time.sleep(3)
+            clear_screen()
+            txt_flush(data["pike"])
+            print(data["option0"])
+            option = input("1 or 2: ")
+            if option == "1":
+                Icepike = Monsters("Ice Pike Monster", 60, 30, ["Pike Sword"], "Ice Pike Diamond", "Pike quest")
+                while option == "1":
+                    clear_screen()
+                    if Icepike.hp <= 1:
+                        txt_flush(data["monsterdead"] % Icepike.name)
+                        for item in stats:
+                            item["bag"] += Icepike.gem
+                    else:
+                        Icepike.hp -= Warrior.deal_dmg(Warrior)
+                    if item["hp"] <= 1:
+                        txt_flush(data["dead"])
+                        game_option()
+                    else:
+                       item["hp"] -= Icepike.take_dmg()
+
+
+            elif option == "2":
+                game_option()
+
+
+
+
+
 
 
 
