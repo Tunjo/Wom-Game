@@ -1,13 +1,15 @@
 {
 "intro":" Hello warrior!!! \n Welcome to World of monsters!!! \n On your path you will fight the monsters and do quests in this ugly and scary world!!!\n Be ready for the most epic battles in your life.\n This journal will be adventure of slaying beasts, dragons and witches.\n Warrior, you are worn!!!\n",
 "option": " 1. Explore \n 2. Inventory \n 3. Quests \n 4. Craft \n 5. Save game \n 6. Back \n",
-"file": " 1. Winter Lakes \n 2. Flame Land \n 3. Un Guru Marceau \n 4. Frost Bolt Vally \n 5. Dragon Bolt Mountain \n",
+"file": " 1. Winter Lakes \n 2. Flame Land \n 3. Un Guru Marceau \n 4. Frost Bolt Vally \n 5. Dragon Bolt Mountain \n 6. Back \n",
 "winter": " You are now in Winter Lakes aria. \n Its windy and snowy, its a fucking cold like shit! \n You are near village called Grahame, and you see the small lake in distance. \n Walking near, you see the lake is frozen. Now you are on lake. \n In front off you, from the frozen lake ugly monster pops up!!! \n ARRRGGGGHHHH!!!! \n Its a fucking big iced and ugly Pike monster!!! \n",
 "pike": " Ice Pike monster is creature formed in old world! \n The monster wants to kill you my dear friend. \n It has unique spell called ice cold wind. \n I WILL EAT YOU ALIVE!!! \n The monster is ready to attack you ......\n",
 "option0": " \n 1. Attack \n 2. Run \n",
-"dealdmg": " You deal %i dmg!!! \n",
-"monsterdead": " %s is dead!!! \n",
-"takedmg": " Enemy deal %i dmg!!! \n",
+"dealdmg": "\n You deal %i dmg!!! \n",
+"monsterdead": " %s is dead!!! \n\n",
+"takedmg": "\n Enemy deal %i dmg!!! \n",
 "dead": " YOU ARE DEAD!!! \n ",
-  "option1": " 1: Hit \n 2. Fireball \n 3. Potion \n 4. Run \n"
+  "option1": " \n 1: Hit \n 2. Fireball \n 3. Potion \n 4. Run \n",
+  "inventory": " \n Welcome to inventory. \n 1. Equip item \n 2. Back \n",
+  "inventory0": "\n To equip item from the bag, type item name \n"
 }

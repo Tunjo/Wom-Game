@@ -1,0 +1,21 @@
+{
+  "winterslake":{
+    "icepike":{
+      "name": "Ice Pike Monster",
+      "hp": 60,
+      "dps": 30,
+      "gem": "Ice Pike Diamond",
+      "quest": "Ice Pike quest",
+      "drop": {
+        "sword": 20,
+        "wand": 25,
+        "chest": 15
+      },
+      "drops": ["Sword of Pike", "Wand Pike", "Pike Scales", "Pike Chest"]
+    },
+    "witch":{
+
+    }
+  }
+
+}
