@@ -144,6 +144,7 @@ def main_manu():
     print("3. EXIT")
     ask = input(" >> ")
     if ask == "1":
+        stats.clear()
         Player.make_user(Player)
         Warrior.stats(Warrior)
         game_option()
@@ -163,8 +164,13 @@ def game_option():
         explore_world()
     elif option == "2":
         inventory()
+    elif option == "5":
+        save_game()
+    elif option == "6":
+        main_manu()
     else:
-        pass
+        print("DONT HAVE THAT OPTION!!!")
+        game_option()
 
 def inventory():
     clear_screen()
@@ -199,7 +205,26 @@ def inventory():
                 print("Wrong entry!!!")
                 time.sleep(2)
                 inventory()
+
     elif options == "2":
+        clear_screen()
+        print_inventory()
+        txt_flush_fast(data["invdelete"])
+        opti = input(">> ")
+        if opti == "1":
+            clear_screen()
+            print_inventory()
+            txt_flush_fast(data["invdelete0"])
+            inp = input(">> ")
+            delete_item_bag_inventory(inp)
+            inventory()
+        elif opti == "2":
+            inventory()
+
+    elif options == "3":
+        game_option()
+
+    else:
         game_option()
 
 
@@ -221,9 +246,44 @@ def del_and_add_items_chest(itemadd):
             item["inventory"]["chest"].append(itemadd)
             item["bag"].pop(itemindex)
 
+def delete_item_bag_inventory(itemadd):
+    for item in stats:
+        if itemadd in item["bag"]:
+            itemindx = item["bag"].index(itemadd)
+            item["bag"].pop(itemindx)
+        elif itemadd in item["inventory"]["weapon"]:
+            item["inventory"]["weapon"].pop(0)
+        elif itemadd in item["inventory"]["chest"]:
+            item["inventory"]["chest"].pop(0)
+        elif itemadd in item["inventory"]["legs"]:
+            item["inventory"]["legs"].pop(0)
+        elif itemadd in item["inventory"]["offhand"]:
+            item["inventory"]["offhand"].pop(0)
+        elif itemadd in item["inventory"]["magic"]:
+            print("CANT DELETE MAGIC!!!")
+
+
+def save_game():
+    with open("savegame.json", "w+") as fp:
+        fp.write(json.dumps(stats))
+    game_option()
+
 
 def load_game():
-    pass
+    with open("savegame.json", "r") as fp:
+        file = json.load(fp)
+    for item in file:
+        clear_screen()
+        txt_flush_fast(data["charload"])
+        option = input(">> ")
+        if option == item["name"]:
+            stats.clear()
+            stats.append(item)
+        else:
+            clear_screen()
+            txt_flush_fast(data["wrongname"])
+            load_game()
+    game_option()
 
 
 def explore_world():
@@ -303,6 +363,7 @@ def ice_pike():
     time.sleep(3)
     clear_screen()
     txt_flush(data["pike"])
+    time.sleep(2)
     fight_npc(npc["winterslake"]["icepike"]["hp"], npc["winterslake"]["icepike"]["name"], npc["winterslake"]["icepike"]["gem"],
               npc["winterslake"]["icepike"]["drops"], npc["winterslake"]["icepike"]["quest"], npc["winterslake"]["icepike"]["dps"])
 
