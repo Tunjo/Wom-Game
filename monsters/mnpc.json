@@ -28,7 +28,8 @@
       "drops": ["Tuuli Wand", "Tuuli Legs of Winter", "Tuuli Robe", "Tuuli staff of Ice"]
     },
     "goblin":{
-
+      "name": "Nadas Silverflow",
+      "hp": 150
     }
   }
 
