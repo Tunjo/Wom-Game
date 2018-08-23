@@ -14,6 +14,20 @@
       "drops": ["Sword of Pike", "Wand Pike", "Pike Scales", "Pike Chest"]
     },
     "witch":{
+      "name": "Tuuli Parn",
+      "hp": 110,
+      "dps": 70,
+      "gem": "Tuuli Diamond",
+      "quest": "Head of the Tuuli Parn",
+      "drop":{
+        "staff": 55,
+        "legs": 35,
+        "wand":35,
+        "robe":100
+      },
+      "drops": ["Tuuli Wand", "Tuuli Legs of Winter", "Tuuli Robe", "Tuuli staff of Ice"]
+    },
+    "goblin":{
 
     }
   }

@@ -30,7 +30,7 @@ class Warrior(Player):
 
 
     def stats(self):
-        self.hp = 1000
+        self.hp = 100
         self.maxhp = 100
         self.dmg = 50
         self.inventory = {
@@ -61,10 +61,6 @@ class Warrior(Player):
 
         stats.append(player_stats)
 
-    def deal_dmg(self):
-        dmgdone = random.randint(math.floor(self.dmg/2), self.dmg)
-        txt_flush(data["dealdmg"] % dmgdone)
-        return dmgdone
 
 
 
@@ -138,10 +134,13 @@ def intro_txt():
 
 def main_manu():
     clear_screen()
-    print("W.O.M.")
-    print("1. START GAME")
-    print("2. LOAD GAME")
-    print("3. EXIT")
+    print()
+    print(" W.O.M.")
+    print()
+    print(" 1. START GAME")
+    print(" 2. LOAD GAME")
+    print(" 3. EXIT")
+    print()
     ask = input(" >> ")
     if ask == "1":
         stats.clear()
@@ -199,25 +198,42 @@ def inventory():
                     item["hp"] += npc["winterslake"]["icepike"]["drop"]["chest"]
                     item["maxhp"] += npc["winterslake"]["icepike"]["drop"]["chest"]
                     inventory()
-
+                elif equip == npc["winterslake"]["witch"]["drops"][0]:
+                    del_and_add_items_weapon(equip)
+                    item["dmg"] += npc["winterslake"]["witch"]["drop"]["wand"]
+                    inventory()
+                elif equip == npc["winterslake"]["witch"]["drops"][1]:
+                    del_and_add_items_legs(equip)
+                    item["hp"] += npc["winterslake"]["witch"]["drop"]["legs"]
+                    item["maxhp"] += npc["winterslake"]["witch"]["drop"]["legs"]
+                    inventory()
+                elif equip == npc["winterslake"]["witch"]["drops"][2]:
+                    del_and_add_items_chest(equip)
+                    item["hp"] += npc["winterslake"]["witch"]["drop"]["robe"]
+                    item["maxhp"] += npc["winterslake"]["witch"]["drop"]["robe"]
+                    inventory()
+                elif equip == npc["winterslake"]["witch"]["drops"][3]:
+                    del_and_add_items_weapon(equip)
+                    item["dmg"] += npc["winterslake"]["witch"]["drop"]["staff"]
             else:
                 clear_screen()
                 print("Wrong entry!!!")
                 time.sleep(2)
                 inventory()
-
     elif options == "2":
         clear_screen()
         print_inventory()
         txt_flush_fast(data["invdelete"])
-        opti = input(">> ")
+        opti = input(" >> ")
+
         if opti == "1":
             clear_screen()
             print_inventory()
             txt_flush_fast(data["invdelete0"])
-            inp = input(">> ")
+            inp = input(" >> ")
             delete_item_bag_inventory(inp)
             inventory()
+
         elif opti == "2":
             inventory()
 
@@ -234,8 +250,10 @@ def del_and_add_items_weapon(itemadd):
             itemindex = item["bag"].index(itemadd)
             item["bag"].append(item["inventory"]["weapon"][0])
             item["inventory"]["weapon"].pop(0)
+            default_dmg()
             item["inventory"]["weapon"].append(itemadd)
             item["bag"].pop(itemindex)
+
 
 def del_and_add_items_chest(itemadd):
     for item in stats:
@@ -243,8 +261,20 @@ def del_and_add_items_chest(itemadd):
             itemindex = item["bag"].index(itemadd)
             item["bag"].append(item["inventory"]["chest"][0])
             item["inventory"]["chest"].pop(0)
+            default_hp()
             item["inventory"]["chest"].append(itemadd)
             item["bag"].pop(itemindex)
+
+
+def del_and_add_items_legs(itemadd):
+    for item in stats:
+        itemindex = item["bag"].index(itemadd)
+        item["bag"].append(item["inventory"]["legs"][0])
+        item["inventory"]["legs"].pop(0)
+        default_hp()
+        item["inventory"]["legs"].append(itemadd)
+        item["bag"].pop(itemindex)
+
 
 def delete_item_bag_inventory(itemadd):
     for item in stats:
@@ -253,14 +283,30 @@ def delete_item_bag_inventory(itemadd):
             item["bag"].pop(itemindx)
         elif itemadd in item["inventory"]["weapon"]:
             item["inventory"]["weapon"].pop(0)
+            default_dmg()
         elif itemadd in item["inventory"]["chest"]:
             item["inventory"]["chest"].pop(0)
+            default_hp()
         elif itemadd in item["inventory"]["legs"]:
             item["inventory"]["legs"].pop(0)
+            default_hp()
         elif itemadd in item["inventory"]["offhand"]:
             item["inventory"]["offhand"].pop(0)
+            default_dmg()
         elif itemadd in item["inventory"]["magic"]:
             print("CANT DELETE MAGIC!!!")
+
+
+def default_dmg():
+    dmg = 50
+    for item in stats:
+        item["dmg"] = dmg
+
+
+def default_hp():
+    hp = 100
+    for item in stats:
+        item["hp"] = hp
 
 
 def save_game():
@@ -275,7 +321,7 @@ def load_game():
     for item in file:
         clear_screen()
         txt_flush_fast(data["charload"])
-        option = input(">> ")
+        option = input(" >> ")
         if option == item["name"]:
             stats.clear()
             stats.append(item)
@@ -294,9 +340,11 @@ def explore_world():
     if inp == "1":
         for item in stats:
             if npc["winterslake"]["icepike"]["gem"] in item["diamonds"]:
-                print("Vec bio vamo!!")
-                time.sleep(3)
-                explore_world()
+                if npc["winterslake"]["witch"]["gem"] in item["diamonds"]:
+                    print("BIO VAMO")
+                    explore_world()
+                else:
+                    witch_north()
             else:
                ice_pike()
     elif inp == "6":
@@ -304,15 +352,39 @@ def explore_world():
     else:
         sys.exit()
 
+
+
+def drink_potion():
+    potion = random.randint(30, 100)
+    for item in stats:
+        if item["potion"] >= 1:
+            item["potion"] -= 1
+            item["hp"] += potion
+            txt_flush_fast(data["potion0"] % potion)
+            time.sleep(1)
+        else:
+            txt_flush_fast(data["potion"])
+            time.sleep(1)
+
+        if item["hp"] >= item["maxhp"]:
+            item["hp"] = item["maxhp"]
+
+
+def deal_dmg(dmg):
+    dmgdone = random.randint(math.floor(dmg/2), dmg)
+    txt_flush(data["dealdmg"] % dmgdone)
+    return dmgdone
+
+
 def npc_deal_dmg(npcdmg):
     dmg = random.randint(math.floor(npcdmg / 2), npcdmg)
     txt_flush(data["takedmg"] % dmg)
     return dmg
 
+
 def fight_npc(jsonhp, txtnpcname, npcgem, npcdrops, npcquest, npcdmg):
     clear_screen()
     npchp = jsonhp
-
     print(data["option0"])
     option = input(" >>")
     if option == "1":
@@ -334,10 +406,12 @@ def fight_npc(jsonhp, txtnpcname, npcgem, npcdrops, npcquest, npcdmg):
                         time.sleep(7)
                     game_option()
                 else:
-                    npchp -= Warrior.deal_dmg(Warrior)
+                    for item in stats:
+                        npchp -= deal_dmg(item["dmg"])
                 for item in stats:
                     if item["hp"] <= 1:
                         clear_screen()
+                        item["hp"] = 0
                         txt_flush(data["dead"])
                         game_option()
                     else:
@@ -345,13 +419,11 @@ def fight_npc(jsonhp, txtnpcname, npcgem, npcdrops, npcquest, npcdmg):
             elif optioon == "2":
                 pass
             elif optioon == "3":
-                pass
+                drink_potion()
             elif optioon == "4":
                 pass
     elif option == "2":
         game_option()
-
-
 
 
 def ice_pike():
@@ -368,13 +440,18 @@ def ice_pike():
               npc["winterslake"]["icepike"]["drops"], npc["winterslake"]["icepike"]["quest"], npc["winterslake"]["icepike"]["dps"])
 
 
-
-
-
-
-
-
-
+def witch_north():
+    clear_screen()
+    txt_flush(data["witch0"])
+    time.sleep(3)
+    clear_screen()
+    draw_txt("witch.txt")
+    time.sleep(3)
+    clear_screen()
+    txt_flush(data["witch1"])
+    time.sleep(2)
+    fight_npc(npc["winterslake"]["witch"]["hp"], npc["winterslake"]["witch"]["name"], npc["winterslake"]["witch"]["gem"],
+              npc["winterslake"]["witch"]["drops"], npc["winterslake"]["witch"]["quest"], npc["winterslake"]["witch"]["dps"])
 
 
 
