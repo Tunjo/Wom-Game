@@ -1,0 +1,169 @@
+{
+  "potion": 30,
+  "books": {
+    "book0": {
+      "name": "Book of health",
+      "cost": 120
+    },
+    "book1": {
+      "name": "Book of damage",
+      "cost": 130
+    },
+    "book2": {
+      "name": "Book of Fireball",
+      "cost": 250
+    },
+    "book3": {
+      "name": "Book of Ice Nova",
+      "cost": 280
+    },
+    "book4": {
+      "name": "Book of Demonic Rain",
+      "cost": 260
+    },
+    "book5": {
+      "name": "Book of Electric Lash",
+      "cost": 330
+    }
+  },
+  "quests":{
+    "quest0":{
+      "name": "Icebreath",
+      "cost": 200
+    },
+    "quest1":{
+      "name": "Rungrolun",
+      "cost": 150
+    },
+    "quest2":{
+      "name": "Dickenson Bulletproof",
+      "cost": 70
+    },
+    "quest3":{
+      "name": "Meleca Indril",
+      "cost": 120
+    },
+    "quest4":{
+      "name": "Wokork",
+      "cost": 55
+    },
+    "quest5":{
+      "name": "The Squeeler",
+      "cost": 220
+    }
+  },
+  "weapons": {
+    "weapon0":{
+      "name": "Sabre of the Sky",
+      "cost": 65,
+      "dmg": 70
+    },
+    "weapon1":{
+      "name": "Bloodsurge Greatsword",
+      "cost": 70,
+      "dmg": 75
+    },
+    "weapon2":{
+      "name": "Labyrinth",
+      "cost": 80,
+      "dmg": 85
+    },
+    "weapon3":{
+      "name": "Dragonbreath Staff",
+      "cost": 90,
+      "dmg": 95
+    },
+    "weapon4":{
+      "name": "Annihilation of Bloodlust",
+      "cost": 100,
+      "dmg": 105
+    },
+    "weapon5":{
+      "name": "Doombinder",
+      "cost": 110,
+      "dmg": 115
+    },
+    "weapon6":{
+      "name": "Hysteria",
+      "cost": 120,
+      "dmg": 125
+    },
+    "weapon7":{
+      "name": "Nexus",
+      "cost": 130,
+      "dmg": 135
+    },
+    "weapon8":{
+      "name": "Lightbane",
+      "cost": 140,
+      "dmg": 145
+    },
+    "weapon9":{
+      "name": "Earthshadow",
+      "cost": 150,
+      "dmg": 155
+    },
+    "weapon10":{
+      "name": "Hope of Zeal",
+      "cost": 160,
+      "dmg": 165
+    }
+  },
+  "legs":{
+    "leg0":{
+      "name": "Fortune of Lost Souls",
+      "cost": 40,
+      "hp": 50
+    },
+    "leg1":{
+      "name": "Renewed Golden Kilt",
+      "cost": 50,
+      "hp": 60
+    },
+    "leg2":{
+      "name": "Steward of Frost Power",
+      "cost": 60,
+      "hp": 70
+    },
+    "leg3":{
+      "name": "Gift of Smite",
+      "cost": 70,
+      "hp": 80
+    },
+    "leg4":{
+      "name": "Legacy of the Flames",
+      "cost": 80,
+      "hp": 90
+    }
+  },
+  "chests":{
+    "chest0": {
+      "name": "Cataclysm Cloth Vestment",
+      "cost": 60,
+      "hp": 70
+    },
+    "chest1": {
+      "name": "Token of Discipline",
+      "cost": 70,
+      "hp": 80
+    },
+    "chest2": {
+      "name": "Robes of the Phoenix",
+      "cost": 80,
+      "hp": 90
+    },
+    "chest3": {
+      "name": "Tunic of Titans",
+      "cost": 90,
+      "hp": 100
+    },
+    "chest04": {
+      "name": "Heirloom of Fury",
+      "cost": 100,
+      "hp": 110
+    }
+  },
+  "crafting":{
+
+  }
+}
